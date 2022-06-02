@@ -1,0 +1,14 @@
+.form-control:focus {
+    border-color: var(--bs-gray-400);
+    box-shadow: none;
+}
+
+button, button:focus{
+    color: var(--bs-gray-600);
+}
+
+button:hover {
+    background-color: var(--bs-gray-200);
+}
+
+

@@ -1,0 +1,50 @@
+.wrapper{
+    height: 25rem;
+    background-color: white;
+    margin-top: -2rem;
+}
+
+.background-wrapper{
+    width: 75rem; 
+    height: 25rem; 
+    background-color: #f0f2f5;
+}
+
+.content-wrapper{
+    height: 10rem;
+    background-color: inherit;
+}
+
+.img-position{
+    position: absolute;
+    bottom: 1rem;
+    border: 4px solid white;
+    border-radius:50%;
+    background-color: white;
+}
+
+.shadow-effect{
+    box-shadow: 0 4px 2px -2px var(--bs-gray-300);
+}
+
+button{
+    height: 2.3rem;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+}
+
+button:focus{
+    box-shadow: none !important;
+}
+
+.message-button{
+    color: var(--bs-dark);
+    background-color: var(--bs-gray-300);
+}
+
+.message-button:hover{
+    background-color: var(--bs-gray-400);
+}

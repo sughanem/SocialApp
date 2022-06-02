@@ -1,0 +1,82 @@
+<div class="wrapper vh-100">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/feed">SocialApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" 
+        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+          <div class="container">
+            <div class="row">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center position-relative">
+                <div class="col-2 d-flex justify-content-center blue-border" [ngClass]="{ 'active':activeTab === 'feed' }">
+                  <li class="nav-item">
+                    <a class="nav-link item-link active" routerLink="feed" aria-current="page" [ngClass]="{ 'active':activeTab === 'feed' }">
+                      <img src="/assets/img/house-fill.svg" alt="Feed" width="28" height="28">
+                    </a>
+                  </li>
+                </div>
+                <div class="col-2 d-flex justify-content-center blue-border" [ngClass]="{ 'active':activeTab === 'profile' }">
+                  <li class="nav-item">
+                    <a class="nav-link item-link" [routerLink]="['/', user.userName]" [ngClass]="{ 'active':activeTab === 'profile' }">
+                      <img src="/assets/img/person-circle.svg" alt="Profile" width="28" height="28">
+                    </a>
+                  </li>
+                </div>
+                <div class="col-2 d-flex justify-content-center blue-border" [ngClass]="{ 'active':activeTab === 'messaging' }">
+                  <li class="nav-item">
+                    <a class="nav-link item-link" routerLink="messaging" [ngClass]="{ 'active':activeTab === 'messaging' }">
+                      <img src="/assets/img/chat-fill.svg" alt="Messaging" width="28" height="28">
+                    </a>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+          <div class="me-1">
+              <app-search-box></app-search-box>
+          </div>
+          <div class="dropdown">
+            <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end mt-3" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a class="dropdown-item" routerLink="settings">
+                  <img src="/assets/img/settings.svg" alt="Settings" width="22" height="22">
+                  <span class="gray-color ms-3">Settings</span></a>
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="logout()" routerLink="login">
+                  <img src="/assets/img/sign-out.svg" alt="LogOut" width="22" height="22">
+                  <span class="gray-color ms-3">Log Out</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="collapse ps-2" id="navbarToggleExternalContent">
+        <ul class="nav navbar-nav">
+          <li><a routerLink="/feed">
+            <img src="/assets/img/house.svg" alt="Feed" width="16" height="16">
+            <span class="gray-color ms-2">Feed</span>
+            </a></li>
+          <li><a routerLink="/settings">
+            <img src="/assets/img/settings.svg" alt="Settings" width="16" height="16">
+            <span class="gray-color ms-2">Settings</span></a></li>
+          <li><a (click)="logout()" routerLink="/login">
+            <img src="/assets/img/sign-out.svg" alt="LogOut" width="16" height="16">
+            <span class="gray-color ms-2">Log out</span></a></li>
+        </ul>
+      </div>
+    </nav>
+  
+    <main class="p-4">
+      <app-spinner></app-spinner>
+      <router-outlet *ngIf="!spinnerIsRunning"></router-outlet>
+    </main> 
+</div>
+
+
+

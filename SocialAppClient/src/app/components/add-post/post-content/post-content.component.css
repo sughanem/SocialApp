@@ -1,0 +1,14 @@
+textarea, textarea:focus {
+    border: none;
+    outline: none !important;
+    box-shadow: none;
+}
+
+select {
+    color: var(--bs-gray-600);
+}
+
+select:focus{
+    border-color: none;
+    outline: none !important;
+}

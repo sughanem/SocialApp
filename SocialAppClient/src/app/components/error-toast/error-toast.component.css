@@ -1,0 +1,10 @@
+:host {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0.5em;
+    z-index: 1200;
+    color: white;
+    padding: 0px;
+  }

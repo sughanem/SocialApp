@@ -1,0 +1,120 @@
+  <div class="modal-header">
+    <h3 class="modal-title fw-bold">Sign Up</h3>
+    <button type="button" class="btn-close"  aria-label="Close" (click)="activeModal.dismiss('Cross click')" ></button>
+  </div>
+  <div class="modal-body">
+      <div class="container-fluid">
+          <form [formGroup]="signupForm" class="row g-3" (ngSubmit)="onSubmit()" novalidate>
+              
+              <div class="col-md-6">
+                  <input type="text" ngbAutofocus class="form-control" id="inputFistName" placeholder="First name"
+                  formControlName="firstName" [ngClass]="{'is-invalid': submitted && firstName?.invalid}" required>
+                    <div *ngIf="firstName?.invalid" class="invalid-feedback">
+                        <div *ngIf="firstName?.errors?.['required']">
+                            First name is required.
+                        </div>
+                        <div *ngIf="firstName?.errors?.['minlength']">
+                            Enter at least two characters.
+                        </div>
+                    </div>
+              </div>
+
+              <div class="col-md-6">
+                  <input type="text" class="form-control" id="inputLastName" placeholder="Last name"
+                  formControlName="lastName" [ngClass]="{'is-invalid': submitted && lastName?.invalid}" required>
+                  <div *ngIf="lastName?.invalid" class="invalid-feedback">
+                    <div *ngIf="lastName?.errors?.['required']">
+                        Last name is required.
+                    </div>
+                    <div *ngIf="lastName?.errors?.['minlength']">
+                        Enter at least two characters.
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12">
+                  <input type="text" class="form-control" id="inputEmail" placeholder="Email"
+                  formControlName="email" [ngClass]="{'is-invalid': submitted && email?.invalid}" required>
+                  <div *ngIf="email?.invalid " class="invalid-feedback">
+                    <div *ngIf="email?.errors?.['required']">
+                        Email is required.
+                    </div>
+                      <div *ngIf="(email?.errors?.['minlength'] || email?.errors?.['pattern'])">
+                            Enter a combiantion of at least eight numbers and 
+                            letters (at least one uppercase letter).
+                      </div>
+                      <div *ngIf="email?.errors?.['uniqueEmail']">
+                            This email is linked to an existing account! Please 
+                            try another email address.
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-12">
+                   <input type="password" class="form-control" id="inputPassword" placeholder="Password"
+                   formControlName="password" [ngClass]="{'is-invalid': submitted && password?.invalid}" required>
+                    <div *ngIf="password?.invalid " class="invalid-feedback">
+                        <div *ngIf="password?.errors?.['required']">
+                            Password is required.
+                        </div>
+                        <div *ngIf="password?.errors?.['minlength'] || password?.errors?.['pattern']">
+                                Enter a combiantion of at least eight numbers and 
+                                letters (at least one uppercase letter).
+                        </div>
+                    </div>
+              </div>
+
+              <div class="col-md-12">
+                  <label class="form-label text-muted">Birthday</label>
+                  <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                            name="dp" formControlName="DOB"  [maxDate]="{year:calendar.getToday().year-16, month:12, day:31}" ngbDatepicker #d="ngbDatepicker"
+                            [ngClass]="{'is-invalid': submitted && DOB?.invalid}" (click)="d.toggle()" required>
+                    </div>
+                  </div>
+                  <!-- <div class="row g-2">
+                      <div class="col-md-4">
+                          <select type="date" class="form-select" id="selectMonth" ></select>
+                      </div>
+                      <div class="col-md-4">
+                          <select id="selectDay" class="form-select" >
+                              <option selected>Choose...</option>
+                              <option>...</option>
+                          </select>
+                      </div>
+                      <div class="col-md-4">
+                          <select type="text" class="form-select" id="selectYear"></select>
+                      </div>
+                  </div> -->
+              </div>
+
+              <div class="col-md-12">
+                  <label class="form-label text-muted">Gender</label>
+                  <div class="row g-3">
+                      <div class="col-6">
+                          <div class="form-check border rounded-3 p-2 position-relative">
+                              <label class="d-block form-check-label" for="femaleRadio">Female</label>
+                              <div class="position-absolute top-50 end-0 translate-middle-y">
+                                  <input class="form-check-input" type="radio" id="femaleRadio" formControlName="gender" value="f" 
+                                  [ngClass]="{'is-invalid': submitted && gender?.invalid}" required>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-6">
+                          <div class="form-check border rounded-3 p-2 position-relative" >
+                              <label class="d-block form-check-label" for="maleRadio">Male</label>
+                              <div class="position-absolute top-50 end-0 translate-middle-y ">
+                                  <input class="form-check-input" type="radio" id="maleRadio" formControlName="gender" value="m"
+                                   [ngClass]="{'is-invalid': submitted && gender?.invalid}" required>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="d-grid col-8 mx-auto">
+                  <button type="submit" class="btn btn-success fw-bold mt-3">Sign Up</button>
+              </div>
+          </form>
+      </div>
+    </div>

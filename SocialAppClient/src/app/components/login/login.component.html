@@ -1,0 +1,52 @@
+<main class="d-flex align-items-center vh-100" 
+  style="background-color: #f0f2f5;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg text-center ">
+        <h1 class="display-2 fw-bold">SocialApp</h1>
+        <p class="h4 text-muted d-none d-lg-block">Share ideas with friends.</p>
+      </div>
+
+      <div class="col-lg text-center mx-auto mt-4 d-flex justify-content-center justify-content-lg-start">
+        <form #loginForm="ngForm" class="login-form shadow p-3 mb-5 bg-body rounded-3 needs-validation"
+         (ngSubmit)="login(loginForm)" novalidate>
+         
+          <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Email" name="email"
+             [(ngModel)]="credentials.email" #email="ngModel" [pattern]="emailRe"
+             [ngClass]="{'is-invalid': (loginForm.submitted && email.invalid) || invalidCre}" required>
+             <div *ngIf="loginForm.submitted && email.invalid" class="invalid-feedback text-start" >
+              <div *ngIf="email.errors?.['required']">
+                Email is required.
+              </div>
+              <div *ngIf="email.errors?.['pattern']"> 
+                Please enter a valid email address, like name@example.com
+              </div>	
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" 
+              minlength="8" [(ngModel)]="credentials.password" #password="ngModel"
+              [ngClass]="{'is-invalid': (loginForm.submitted && password.invalid) || invalidCre}" required>
+              <div *ngIf="loginForm.submitted && password.invalid" class="invalid-feedback text-start" >
+                <div *ngIf="password.errors?.['required']">
+                  Password is required.
+                </div>
+                <div *ngIf="password.errors?.['minlength']">
+                  Password must be at least 8 characters long.
+                </div>
+              </div>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-md mb-3 fw-bold">Log In</button>
+          </div>
+          <hr/>
+          <a role="button" class="btn btn-outline-success mt-3" 
+          (click)="openSignupComponent()" >Create new account</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<app-error-toast aria-live="polite" aria-atomic="true"></app-error-toast>

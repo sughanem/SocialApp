@@ -1,0 +1,9 @@
+.card-title{
+    color: var(--bs-gray-700);
+}
+.card-footer{
+    height: 30px;
+    font-size: small;
+    display: flex;
+    align-items: center;
+}

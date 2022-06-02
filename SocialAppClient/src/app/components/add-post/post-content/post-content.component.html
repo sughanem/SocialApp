@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h6 class="modal-title">Create a post</h6>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')" ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex">
+      <div class="d-flex justify-content-start align-items-center">
+        <img src="/assets/img/person-circle.svg" alt="user-image" width="52" height="52">
+      </div>
+      <div class="flex-column ms-2">
+        <h6 class="fw-bold">{{fullName}}</h6>
+        <select formControlName="visibility" class="rounded-pill ps-1 pe-1" aria-label="Visibility select">
+          <option value="0">Anyone</option>
+          <option value="1">Friends</option>
+        </select>
+      </div>
+    </div>
+    <textarea class="form-control mt-3" formControlName="content" ngbAutofocus rows="5" placeholder="What do you want to talk about?"></textarea>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary rounded-pill mt-3" [disabled]="!createPostForm.valid">Post</button>
+    </div>
+  </form>
+</div>

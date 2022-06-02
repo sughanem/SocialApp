@@ -1,0 +1,30 @@
+<div class="d-flex align-items-center position-relative">
+    <input
+    type="text"
+    class="form-control"
+    [ngbTypeahead]="search"
+    [resultTemplate]="rt" 
+    (focus)="focus$.next($any($event).target.value)"
+    (keydown)="keydown$.next($any($event).target)"
+    #instance="ngbTypeahead"
+    placeholder="Search"
+    [inputFormatter]="formatter"
+    [focusFirst]="false"
+    style="width: 200px;"
+  />
+
+  <div class="position-absolute top-50 end-0 translate-middle-y me-2">
+    <div *ngIf="searching" class="spinner-border spinner-border-sm spinner-alignment" role="status"></div>
+  </div>
+</div>
+
+<ng-template #rt let-user="result" >
+    <div *ngIf="user === 'error' ">Nothing Found.</div>
+    <span class="d-block vw-100" *ngIf="user !== 'error' " [routerLink]="user.userName">
+        <img src="/assets/img/person-circle-gray.svg" class="me-1" width="22px" height="22px">
+        {{ user.firstName + ' ' + user.lastName}}
+    </span>
+</ng-template>
+
+
+

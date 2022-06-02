@@ -1,0 +1,14 @@
+<ngb-toast
+  @fade
+  *ngFor="let toast of errorToastService.toasts"
+  [delay]="7000"
+  [autohide]="true"
+  class="bg-danger w-auto">
+    <div class="container">
+      <img src="/assets/img/info-fill.svg" alt="Info"/>
+      <div class="d-inline-block ms-3">
+        <h6 >{{toast.body}}</h6>
+      </div>
+    </div>
+</ngb-toast>
+

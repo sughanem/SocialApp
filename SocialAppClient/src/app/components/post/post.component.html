@@ -1,0 +1,17 @@
+<div class="card rounded-3 mx-auto m-2" *ngFor="let post of userPosts$ | async">
+    <div class="card-header">
+        <img src="/assets/img/person-circle.svg" alt="user-image" width="24" height="24">
+        <h6 class="card-title fw-normal d-inline-block ms-2">{{ user.firstName + ' ' + user.lastName }}</h6>
+ 
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ post.content }}</p>
+    </div>
+    <div class="card-footer">
+        <span class="text-muted">
+            Created on:
+            {{ this.dateFormatPipe.transform(post.doc) }}
+        </span>
+      </div>
+</div>
+

@@ -1,0 +1,35 @@
+.navbar{
+    background-color: white;
+}
+.item-link.active img, .item-link:hover{
+    filter: invert(34%) sepia(81%) saturate(2824%) hue-rotate(202deg) brightness(98%) contrast(94%);
+}
+
+.blue-border.active::after{
+    position: absolute;
+    width: 6rem;
+    bottom: -0.5rem;
+    border-bottom: 3px solid #1877f2;
+    content: '';
+}
+
+.gray-color{
+    color: var(--bs-gray-700);;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    background-color: #f0f2f5;
+    margin-top: 60px;
+}

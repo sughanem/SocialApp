@@ -21,7 +21,6 @@ namespace SocialAppService
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment env { get; }
-        private readonly string MyAllowPoliciy = "_MyAllowPoliciy";
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -86,19 +85,6 @@ namespace SocialAppService
             services.AddScoped(typeof(TokenGenerator));
             services.AddScoped(typeof(CacheRepository<>));
             services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>)); 
-
-            services.AddCors(options => 
-            {
-                options.AddPolicy(name: MyAllowPoliciy,
-                                builder => 
-                                {
-                                    builder.WithOrigins("http://localhost:4200")
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod();
-
-                                });
-
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,7 +95,6 @@ namespace SocialAppService
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SocialAppService v1"));
-                app.UseCors(MyAllowPoliciy);
             }
             else
             {
@@ -118,7 +103,13 @@ namespace SocialAppService
                 app.UseHsts();
             }
 
-            PerpDB.perpPopulation(app);
+            // PerpDB.perpPopulation(app);
+
+            app.UseCors(builder => builder
+                .WithOrigins("https://localhost", "https://socialappnet.herokuapp.com") 
+                .WithMethods("GET, POST", "OPTIONS")  
+                .WithHeaders("Origin", "Authorization") 
+            );
        
             app.UseStaticFiles();
             if (!env.IsDevelopment())

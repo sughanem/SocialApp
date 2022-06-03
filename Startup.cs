@@ -33,9 +33,8 @@ namespace SocialAppService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddDbContext<SocialAppDatabase>(options => 
-              options.UseSqlServer(Configuration["ConnectionStrings"] ?? Configuration["ConnectionStrings:DefaultConnection"]));
+              options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddIdentity<User, IdentityRole<int>>(options => {
                 options.Password.RequireNonAlphanumeric = false;
@@ -136,9 +135,9 @@ namespace SocialAppService
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt => 
             {
-                var key = Encoding.ASCII.GetBytes(this.AuthKey ?? Configuration["JWTConfig:Key"]);
-                var issuer = Configuration["Issuer"] ?? Configuration["JWTConfig:Issuer"];
-                var audience = Configuration["Audience"] ?? Configuration["JWTConfig:Audience"];
+                var key = Encoding.ASCII.GetBytes(Configuration["JWTConfig:Key"]);
+                var issuer = Configuration["JWTConfig:Issuer"];
+                var audience = Configuration["JWTConfig:Audience"];
                 opt.TokenValidationParameters = new TokenValidationParameters(){
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),

@@ -31,18 +31,9 @@ namespace SocialAppService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Configuration["DBServer"] ?? "localhost";
-            var port = Configuration["DBPort"] ?? "1433";
-            var userId = Configuration["DBUser"] ?? "sa";
-            var password = Configuration["DBPassword"] ?? "Pa@@w0rd";
-           
-        //    Configuration["ConnectionStrings:DefaultConnection"]
-        // $"Server={server},{port};Initial Catalog=SocialApp;User Id={userId};Password={password}"
-
-        // $"Server={server},{port};Initial Catalog=SocialAppDB;User Id={userId};Password={password}"
-
+            
             services.AddDbContext<SocialAppDatabase>(options => 
-              options.UseSqlServer(Configuration["ConnectionStrings"]));
+              options.UseSqlServer(Configuration["ConnectionStrings"] ?? Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddIdentity<User, IdentityRole<int>>(options => {
                 options.Password.RequireNonAlphanumeric = false;
@@ -106,7 +97,7 @@ namespace SocialAppService
             // PerpDB.perpPopulation(app);
 
             app.UseCors(builder => builder
-                .WithOrigins("https://localhost", "https://socialappnet.herokuapp.com") 
+                .WithOrigins(Configuration["SiteUrl"] ?? "https://localhost") 
                 .WithMethods("GET, POST", "OPTIONS")  
                 .WithHeaders("Origin", "Authorization") 
             );
@@ -143,9 +134,9 @@ namespace SocialAppService
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt => 
             {
-                var key = Encoding.ASCII.GetBytes(Configuration["JWTConfig:Key"]);
-                var issuer = Configuration["JWTConfig:Issuer"];
-                var audience = Configuration["JWTConfig:Audience"];
+                var key = Encoding.ASCII.GetBytes(Configuration["Key"] ?? Configuration["JWTConfig:Key"]);
+                var issuer = Configuration["Issuer"] ?? Configuration["JWTConfig:Issuer"];
+                var audience = Configuration["Audience"] ?? Configuration["JWTConfig:Audience"];
                 opt.TokenValidationParameters = new TokenValidationParameters(){
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),

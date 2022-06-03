@@ -21,11 +21,13 @@ namespace SocialAppService
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment env { get; }
+        private string AuthKey;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             this.env = env;
+            this.AuthKey = Configuration["Key"];
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -134,7 +136,7 @@ namespace SocialAppService
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt => 
             {
-                var key = Encoding.ASCII.GetBytes(Configuration["Key"] ?? Configuration["JWTConfig:Key"]);
+                var key = Encoding.ASCII.GetBytes(this.AuthKey ?? Configuration["JWTConfig:Key"]);
                 var issuer = Configuration["Issuer"] ?? Configuration["JWTConfig:Issuer"];
                 var audience = Configuration["Audience"] ?? Configuration["JWTConfig:Audience"];
                 opt.TokenValidationParameters = new TokenValidationParameters(){

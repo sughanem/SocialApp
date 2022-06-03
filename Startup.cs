@@ -42,7 +42,7 @@ namespace SocialAppService
         // $"Server={server},{port};Initial Catalog=SocialAppDB;User Id={userId};Password={password}"
 
             services.AddDbContext<SocialAppDatabase>(options => 
-              options.UseSqlServer("workstation id=SocialAppDB.mssql.somee.com;packet size=4096;user id=suleiman_SQLLogin_1;pwd=ujz2xi97v7;data source=SocialAppDB.mssql.somee.com;persist security info=False;initial catalog=SocialAppDB"));
+              options.UseSqlServer(Configuration["ConnectionStrings"]));
 
             services.AddIdentity<User, IdentityRole<int>>(options => {
                 options.Password.RequireNonAlphanumeric = false;

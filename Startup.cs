@@ -54,7 +54,7 @@ namespace SocialAppService
 
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "wwwroot";
+                configuration.RootPath = "SocialAppClient/dist";
             });
             
             if (env.IsDevelopment())

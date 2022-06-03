@@ -23,7 +23,7 @@
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
     <SpaRoot>SocialAppClient\</SpaRoot>
-    <RootNamespace>SocialAppService</RootNamespace>
+    <RootNamespace>SocialAppClient</RootNamespace>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 
     <!-- Set this to true if you enable server-side prerendering -->

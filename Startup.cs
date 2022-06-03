@@ -21,7 +21,6 @@ namespace SocialAppService
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment env { get; }
-        private readonly string MyAllowPoliciy = "_MyAllowPoliciy";
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -32,18 +31,9 @@ namespace SocialAppService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Configuration["DBServer"] ?? "localhost";
-            var port = Configuration["DBPort"] ?? "1433";
-            var userId = Configuration["DBUser"] ?? "sa";
-            var password = Configuration["DBPassword"] ?? "Pa@@w0rd";
-           
-        //    Configuration["ConnectionStrings:DefaultConnection"]
-        // $"Server={server},{port};Initial Catalog=SocialApp;User Id={userId};Password={password}"
-
-        // $"Server={server},{port};Initial Catalog=SocialAppDB;User Id={userId};Password={password}"
-
+            
             services.AddDbContext<SocialAppDatabase>(options => 
-              options.UseSqlServer("workstation id=SocialAppDB.mssql.somee.com;packet size=4096;user id=suleiman_SQLLogin_1;pwd=ujz2xi97v7;data source=SocialAppDB.mssql.somee.com;persist security info=False;initial catalog=SocialAppDB"));
+              options.UseSqlServer(Configuration["ConnectionStrings"] ?? Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddIdentity<User, IdentityRole<int>>(options => {
                 options.Password.RequireNonAlphanumeric = false;
@@ -86,19 +76,6 @@ namespace SocialAppService
             services.AddScoped(typeof(TokenGenerator));
             services.AddScoped(typeof(CacheRepository<>));
             services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>)); 
-
-            services.AddCors(options => 
-            {
-                options.AddPolicy(name: MyAllowPoliciy,
-                                builder => 
-                                {
-                                    builder.WithOrigins("http://localhost:4200")
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod();
-
-                                });
-
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,7 +86,6 @@ namespace SocialAppService
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SocialAppService v1"));
-                app.UseCors(MyAllowPoliciy);
             }
             else
             {
@@ -118,7 +94,13 @@ namespace SocialAppService
                 app.UseHsts();
             }
 
-            PerpDB.perpPopulation(app);
+            // PerpDB.perpPopulation(app);
+
+            app.UseCors(builder => builder
+                .WithOrigins(Configuration["SiteUrl"] ?? "https://localhost") 
+                .WithMethods("GET, POST", "OPTIONS")  
+                .WithHeaders("Origin", "Authorization") 
+            );
        
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -152,9 +134,9 @@ namespace SocialAppService
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt => 
             {
-                var key = Encoding.ASCII.GetBytes(Configuration["JWTConfig:Key"]);
-                var issuer = Configuration["JWTConfig:Issuer"];
-                var audience = Configuration["JWTConfig:Audience"];
+                var key = Encoding.ASCII.GetBytes(Configuration["Key"] ?? Configuration["JWTConfig:Key"]);
+                var issuer = Configuration["Issuer"] ?? Configuration["JWTConfig:Issuer"];
+                var audience = Configuration["Audience"] ?? Configuration["JWTConfig:Audience"];
                 opt.TokenValidationParameters = new TokenValidationParameters(){
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),

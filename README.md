@@ -1,7 +1,8 @@
 # SocialApp
 
- ### Social networking app in which a user can create an account, log in, write a post and share it with his friends:
+ Social networking app in which a user can create an account, log in, write a post and share it with his friends:
 
+#  
 
 ## Table of Contents 
 

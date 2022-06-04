@@ -12,8 +12,8 @@
 
 ## Features
 
-* Full Docker integration (Docker based)
-* Production ready 
+* Full Docker integration (Docker based).
+* Production ready. 
 * ASP.NET backend with: 
 
     * MSSQL Server Database.
@@ -30,7 +30,7 @@
 
 
 ## Deployment
-Deplyed to [heruko] (https://socialappnet.herokuapp.com) using jincod buildpack
+Deplyed to [heruko](https://socialappnet.herokuapp.com) using jincod buildpack.
 
 
 ## License

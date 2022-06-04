@@ -19,7 +19,7 @@
     * MSSQL Server Database.
     * Entity Framework Core code first approach.
     * Secure password hashing by default using MS Identity.
-    * .NET web api Service.
+    * .NET rest-api service.
     * JWT token authentication.
 
 * Angular frontend:

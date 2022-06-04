@@ -2,11 +2,11 @@
 
  Social networking app in which a user can create an account, log in, write a post and share it with his friends:
 
-#  
 
 ## Table of Contents 
 
 - [Features](#Features)
+- [Deployment](#Deployment)
 - [License](#license)
 
 
@@ -27,6 +27,10 @@
     * Auto suggest search box.
     * Client side validation using Angular template driven and reactive forms.
     * Resposive design using Bootstrap 5.
+
+
+## Deployment
+Deplyed to [heruko] (https://socialappnet.herokuapp.com) using jincod buildpack
 
 
 ## License

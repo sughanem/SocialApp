@@ -24,7 +24,7 @@
 
 * Angular frontend:
 
-    * Resposive design using Bootstrap 5.
+    * Responsive design using Bootstrap 5.
     * JWT Authentication handling.
     * Auto suggest search box.
     * Client side validation using Angular template driven and reactive forms.

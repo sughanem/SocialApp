@@ -14,6 +14,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using SocialAppService.Models;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+// using SocialAppService.MessagingServer;
 
 namespace SocialAppService
 {
@@ -118,6 +119,7 @@ namespace SocialAppService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                // endpoints.MapHub<MessagingHub>("/MessagingHub");
             });
 
             app.UseSpa(spa =>
